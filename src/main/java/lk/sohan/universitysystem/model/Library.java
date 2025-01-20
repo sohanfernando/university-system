@@ -17,6 +17,7 @@ public class Library {
     private String name;
     private String location;
 
-    @OneToMany(mappedBy = "library")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "library_id")
     private Set<Book> books;
 }

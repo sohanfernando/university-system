@@ -18,6 +18,7 @@ public class Instructor {
     private String email;
     private String officeLocation;
 
-    @OneToMany
-    private List<Course> courseList;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 }

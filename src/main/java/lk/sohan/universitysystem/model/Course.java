@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -13,13 +14,17 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
     private int credits;
 
-    @ManyToMany
-    private List<Student> students;
+    @ManyToOne
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor;
 
-    @OneToMany(mappedBy = "course")
-    private List<Assignment> assignmentList;
+    @OneToMany
+    @JoinColumn(name = "course_id")
+    private Set<Assignment> assignments;
+
 }

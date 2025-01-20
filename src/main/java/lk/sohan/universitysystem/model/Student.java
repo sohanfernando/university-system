@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity(name = "students")
 @Getter
@@ -17,8 +17,21 @@ public class Student {
 
     private String name;
     private String email;
-    private Date enrollmentDate;
+    private LocalDate enrollmentDate;
 
-    @ManyToMany(mappedBy = "students")
-    private List<Course> course;
+    @ManyToMany
+    @JoinTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private Set<Course> course;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_books",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private Set<Book> borrowedBooks;
 }

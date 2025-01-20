@@ -19,4 +19,7 @@ public class Course {
 
     @ManyToMany
     private List<Student> students;
+
+    @OneToMany(mappedBy = "course")
+    private List<Assignment> assignmentList;
 }

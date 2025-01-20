@@ -4,21 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
-public class Student {
+public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String bio;
+    private String linkedin;
+    private String github;
 
-    private String name;
-    private String email;
-    private Date enrollmentDate;
-
-    @ManyToMany(mappedBy = "students")
-    private List<Course> course;
+    @OneToOne
+    private Student student;
 }
